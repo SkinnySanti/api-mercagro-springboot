@@ -15,10 +15,11 @@ import java.util.List;
 
 public class CultivoDTO {
     private Long idCultivo;
+    private String nombreCultivo;
     private String nombreProducto;
     private String descripcion;
     private Integer cantidad;
-    private String unidadMedida = "kg";
+    private String unidadMedida;
     private BigDecimal precio;
     private EstadoCultivo estado;
     private LocalDate fechaCreacion;

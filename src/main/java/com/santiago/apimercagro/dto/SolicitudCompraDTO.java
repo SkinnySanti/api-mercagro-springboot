@@ -14,6 +14,7 @@ import java.time.LocalDate;
 public class SolicitudCompraDTO {
     private Long idSolicitudCompra;
     private String nombreCultivo;
+    private String nombreProducto;
     private String mensaje;
     private EstadoSolicitud estado;
     private LocalDate fechaCreacion;

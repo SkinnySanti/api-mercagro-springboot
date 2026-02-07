@@ -1,4 +1,70 @@
 package com.santiago.apimercagro.service;
 
-public class CultivoService {
+import com.santiago.apimercagro.dto.CultivoDTO;
+import com.santiago.apimercagro.exception.NotFoundException;
+import com.santiago.apimercagro.mapper.CultivoMapper;
+import com.santiago.apimercagro.model.Cultivo;
+import com.santiago.apimercagro.model.EstadoCultivo;
+import com.santiago.apimercagro.model.Producto;
+import com.santiago.apimercagro.repository.CultivoRepository;
+import com.santiago.apimercagro.repository.ProductoRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class CultivoService implements ICultivoService{
+
+
+    private final CultivoRepository cultivoRepository;
+    private final ProductoRepository productoRepository;
+
+    public CultivoService(CultivoRepository cultivoRepository, ProductoRepository productoRepository) {
+        this.cultivoRepository = cultivoRepository;
+        this.productoRepository = productoRepository;
+    }
+
+    @Override
+    public List<CultivoDTO> listarCultivos() {
+        return CultivoMapper.toDtoList(cultivoRepository.findAll());
+    }
+
+    @Override
+    public CultivoDTO buscarCultivoPorId(Long id) {
+        Cultivo cultivoEncontrado = cultivoRepository.findById(id).orElseThrow(()->
+                new NotFoundException("Cultivo no encontrado"));
+
+        return CultivoMapper.toDto(cultivoEncontrado);
+    }
+
+    @Override
+    public CultivoDTO crearCultivo(CultivoDTO cultivoDTO) {
+        //Verificaiones para creacion del cultivo
+        if(cultivoDTO == null) throw new RuntimeException("CultivoDto es null");
+        //Verificacion para cultivos PUBLICADOS
+        if(cultivoDTO.getEstado().equals(EstadoCultivo.PUBLICADO)){
+            //Buscamos si existe el producto por nombre
+            Producto producto = productoRepository.findProductoByNombre(cultivoDTO.getNombreProducto())
+                    .orElseThrow(()-> new NotFoundException("Producto no asigando para el cultivo PUBLICADO " + cultivoDTO.getNombreProducto()));
+            //Validacion para ver si tiene un precio el cultivo
+            if(cultivoDTO.getPrecio() == null) throw new RuntimeException("El precio es obligatorio para publicar el cultivo");
+            //Validadcion para verificar si el precio del cultivo es mayor al del precio del producto
+            if(cultivoDTO.getPrecio().compareTo(producto.getPrecio()) == 0 || cultivoDTO.getPrecio().compareTo(producto.getPrecio()) > 0)
+                throw new RuntimeException("El precio debe estar por debajo del precio de mercado: " + producto.getPrecio());
+        }
+
+        Cultivo cultivo = CultivoMapper.toEntity(cultivoDTO);
+
+        return CultivoMapper.toDto(cultivoRepository.save(cultivo));
+    }
+
+    @Override
+    public CultivoDTO actualizarCultivo(Long id, CultivoDTO cultivoDTO) {
+        return null;
+    }
+
+    @Override
+    public void eliminarCultivo(Long id) {
+
+    }
 }

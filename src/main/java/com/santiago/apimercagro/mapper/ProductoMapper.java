@@ -3,8 +3,11 @@ package com.santiago.apimercagro.mapper;
 import com.santiago.apimercagro.dto.ProductoDTO;
 import com.santiago.apimercagro.model.Producto;
 
+import java.util.Collections;
+import java.util.List;
+
 public class ProductoMapper {
-    public ProductoDTO toDto(Producto producto){
+    public static ProductoDTO toDto(Producto producto){
         if(producto == null) return null;
 
         return ProductoDTO.builder()
@@ -16,7 +19,7 @@ public class ProductoMapper {
                 .build();
     }
 
-    public Producto toEntity(ProductoDTO productoDTO){
+    public static Producto toEntity(ProductoDTO productoDTO){
         if(productoDTO == null) return null;
 
         return Producto.builder()
@@ -26,5 +29,13 @@ public class ProductoMapper {
                 .unidadMedida(productoDTO.getUnidadMedida())
                 .fechaActualizacion(productoDTO.getFechaActualizacion())
                 .build();
+    }
+
+    public static List<ProductoDTO> toDtoList(List<Producto> productos){
+        if(productos == null || productos.isEmpty()) return Collections.emptyList();
+
+        return productos.stream()
+                .map(ProductoMapper::toDto)
+                .toList();
     }
 }

@@ -23,6 +23,8 @@ public class Cultivo {
     @Column (name = "id_cultivo")
     private Long idCultivo;
 
+    private String nombre;
+
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "producto_id", referencedColumnName = "id_producto")
     private Producto producto;
