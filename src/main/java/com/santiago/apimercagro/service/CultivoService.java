@@ -60,11 +60,29 @@ public class CultivoService implements ICultivoService{
 
     @Override
     public CultivoDTO actualizarCultivo(Long id, CultivoDTO cultivoDTO) {
-        return null;
+        Cultivo cultivo = cultivoRepository.findById(id).orElseThrow(()->
+                new NotFoundException("Cultivo no encontrado"));
+        Producto producto = productoRepository.findProductoByNombre(cultivoDTO.getNombreProducto())
+                        .orElseThrow(()->new NotFoundException("Producto no encontrado"
+                                + cultivoDTO.getNombreProducto()));
+
+        cultivo.setNombre(cultivoDTO.getNombreCultivo());
+        cultivo.setProducto(producto);
+        cultivo.setDescripcion(cultivoDTO.getDescripcion());
+        cultivo.setCantidad(cultivoDTO.getCantidad());
+        cultivo.setUnidadMedida(cultivoDTO.getUnidadMedida());
+        cultivo.setPrecio(cultivoDTO.getPrecio());
+        cultivo.setEstadoCultivo(cultivoDTO.getEstado());
+        cultivo.setFechaCreacion(cultivoDTO.getFechaCreacion());
+
+        return CultivoMapper.toDto(cultivoRepository.save(cultivo));
     }
 
     @Override
     public void eliminarCultivo(Long id) {
-
+        if(!cultivoRepository.existsById(id)){
+            throw new NotFoundException("Cultivo no encontrado: " + id);
+        }
+        cultivoRepository.deleteById(id);
     }
 }
