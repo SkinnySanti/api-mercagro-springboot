@@ -1,7 +1,7 @@
 package com.santiago.apimercagro.service;
 
 import com.santiago.apimercagro.dto.RolDTO;
-import com.santiago.apimercagro.model.Roles;
+import com.santiago.apimercagro.enums.Roles;
 
 import java.util.List;
 

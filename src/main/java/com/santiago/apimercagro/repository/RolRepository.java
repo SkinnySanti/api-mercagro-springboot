@@ -1,7 +1,7 @@
 package com.santiago.apimercagro.repository;
 
 import com.santiago.apimercagro.model.Rol;
-import com.santiago.apimercagro.model.Roles;
+import com.santiago.apimercagro.enums.Roles;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

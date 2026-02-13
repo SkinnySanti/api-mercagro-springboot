@@ -4,7 +4,7 @@ import com.santiago.apimercagro.dto.RolDTO;
 import com.santiago.apimercagro.exception.NotFoundException;
 import com.santiago.apimercagro.mapper.RolMapper;
 import com.santiago.apimercagro.model.Rol;
-import com.santiago.apimercagro.model.Roles;
+import com.santiago.apimercagro.enums.Roles;
 import com.santiago.apimercagro.repository.RolRepository;
 import org.springframework.stereotype.Service;
 

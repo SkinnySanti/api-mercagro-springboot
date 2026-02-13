@@ -4,7 +4,7 @@ import com.santiago.apimercagro.dto.CultivoDTO;
 import com.santiago.apimercagro.exception.NotFoundException;
 import com.santiago.apimercagro.mapper.CultivoMapper;
 import com.santiago.apimercagro.model.Cultivo;
-import com.santiago.apimercagro.model.EstadoCultivo;
+import com.santiago.apimercagro.enums.EstadoCultivo;
 import com.santiago.apimercagro.model.Producto;
 import com.santiago.apimercagro.repository.CultivoRepository;
 import com.santiago.apimercagro.repository.ProductoRepository;

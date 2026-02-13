@@ -2,10 +2,9 @@ package com.santiago.apimercagro.mapper;
 
 import com.santiago.apimercagro.dto.RolDTO;
 import com.santiago.apimercagro.model.Rol;
-import com.santiago.apimercagro.model.Roles;
+import com.santiago.apimercagro.enums.Roles;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 
 public class RolMapper {

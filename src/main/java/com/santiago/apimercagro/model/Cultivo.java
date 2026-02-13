@@ -1,5 +1,6 @@
 package com.santiago.apimercagro.model;
 
+import com.santiago.apimercagro.enums.EstadoCultivo;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;

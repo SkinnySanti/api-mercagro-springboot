@@ -1,4 +1,4 @@
-package com.santiago.apimercagro.model;
+package com.santiago.apimercagro.enums;
 
 public enum Roles {
     ADMIN,

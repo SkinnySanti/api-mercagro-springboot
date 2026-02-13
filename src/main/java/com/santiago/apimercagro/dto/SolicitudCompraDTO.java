@@ -1,6 +1,6 @@
 package com.santiago.apimercagro.dto;
 
-import com.santiago.apimercagro.model.EstadoSolicitud;
+import com.santiago.apimercagro.enums.EstadoSolicitud;
 import lombok.*;
 
 import java.time.LocalDate;

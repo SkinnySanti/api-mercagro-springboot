@@ -2,6 +2,7 @@ package com.santiago.apimercagro.mapper;
 
 import com.santiago.apimercagro.dto.CultivoDTO;
 import com.santiago.apimercagro.dto.SolicitudCompraDTO;
+import com.santiago.apimercagro.enums.EstadoCultivo;
 import com.santiago.apimercagro.exception.NotFoundException;
 import com.santiago.apimercagro.model.*;
 import com.santiago.apimercagro.repository.CultivoRepository;

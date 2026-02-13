@@ -1,6 +1,6 @@
 package com.santiago.apimercagro.dto;
 
-import com.santiago.apimercagro.model.Roles;
+import com.santiago.apimercagro.enums.Roles;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

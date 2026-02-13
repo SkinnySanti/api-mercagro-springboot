@@ -27,9 +27,9 @@ public class ProductoService implements IProductoService{
 
     @Override
     public ProductoDTO buscarProductoPorId(Long id) {
-        Producto productoEntontrado = productoRepository.findById(id).orElseThrow(() ->
+        Producto productoEncontrado = productoRepository.findById(id).orElseThrow(() ->
                 new NotFoundException("Producto no encontrado"));
-        return ProductoMapper.toDto(productoEntontrado);
+        return ProductoMapper.toDto(productoEncontrado);
     }
 
     @Override

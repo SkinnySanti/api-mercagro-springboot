@@ -1,6 +1,6 @@
 package com.santiago.apimercagro.dto;
 
-import com.santiago.apimercagro.model.EstadoCultivo;
+import com.santiago.apimercagro.enums.EstadoCultivo;
 import lombok.*;
 
 import java.math.BigDecimal;
