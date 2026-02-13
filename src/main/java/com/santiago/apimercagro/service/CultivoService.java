@@ -18,15 +18,18 @@ public class CultivoService implements ICultivoService{
 
     private final CultivoRepository cultivoRepository;
     private final ProductoRepository productoRepository;
+    private final CultivoMapper cultivoMapper;
 
-    public CultivoService(CultivoRepository cultivoRepository, ProductoRepository productoRepository) {
+    public CultivoService(CultivoRepository cultivoRepository, ProductoRepository productoRepository,
+                          CultivoMapper cultivoMapper) {
         this.cultivoRepository = cultivoRepository;
         this.productoRepository = productoRepository;
+        this.cultivoMapper = cultivoMapper;
     }
 
     @Override
     public List<CultivoDTO> listarCultivos() {
-        return CultivoMapper.toDtoList(cultivoRepository.findAll());
+        return cultivoMapper.toDtoList(cultivoRepository.findAll());
     }
 
     @Override
@@ -34,7 +37,7 @@ public class CultivoService implements ICultivoService{
         Cultivo cultivoEncontrado = cultivoRepository.findById(id).orElseThrow(()->
                 new NotFoundException("Cultivo no encontrado"));
 
-        return CultivoMapper.toDto(cultivoEncontrado);
+        return cultivoMapper.toDto(cultivoEncontrado);
     }
 
     @Override
@@ -53,9 +56,9 @@ public class CultivoService implements ICultivoService{
                 throw new RuntimeException("El precio debe estar por debajo del precio de mercado: " + producto.getPrecio());
         }
 
-        Cultivo cultivo = CultivoMapper.toEntity(cultivoDTO);
+        Cultivo cultivo = cultivoMapper.toEntity(cultivoDTO);
 
-        return CultivoMapper.toDto(cultivoRepository.save(cultivo));
+        return cultivoMapper.toDto(cultivoRepository.save(cultivo));
     }
 
     @Override
@@ -75,7 +78,7 @@ public class CultivoService implements ICultivoService{
         cultivo.setEstadoCultivo(cultivoDTO.getEstado());
         cultivo.setFechaCreacion(cultivoDTO.getFechaCreacion());
 
-        return CultivoMapper.toDto(cultivoRepository.save(cultivo));
+        return cultivoMapper.toDto(cultivoRepository.save(cultivo));
     }
 
     @Override

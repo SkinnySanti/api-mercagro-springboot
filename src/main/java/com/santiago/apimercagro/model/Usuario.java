@@ -36,8 +36,6 @@ public class Usuario {
 
     private String nombreCompleto;
 
-    private boolean activo = true;
-
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "rol_id", referencedColumnName = "id_rol")
     private Rol rol;
