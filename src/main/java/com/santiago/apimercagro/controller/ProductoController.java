@@ -2,6 +2,7 @@ package com.santiago.apimercagro.controller;
 
 import com.santiago.apimercagro.dto.ProductoDTO;
 import com.santiago.apimercagro.service.IProductoService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +35,7 @@ public class ProductoController {
     }
 
     @PostMapping
-    ResponseEntity<ProductoDTO> crearProducto(@RequestBody ProductoDTO productoDTO){
+    ResponseEntity<ProductoDTO> crearProducto(@Valid @RequestBody ProductoDTO productoDTO){
         log.info("Creando producto...");
         ProductoDTO productoCreado = productoService.crearProducto(productoDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(productoCreado);

@@ -1,7 +1,7 @@
 package com.santiago.apimercagro.mapper;
 
-import com.santiago.apimercagro.dto.RequestUsuarioDTO;
-import com.santiago.apimercagro.dto.ResponseUsuarioDTO;
+import com.santiago.apimercagro.dto.request.RequestUsuarioDTO;
+import com.santiago.apimercagro.dto.response.ResponseUsuarioDTO;
 import com.santiago.apimercagro.exception.NotFoundException;
 import com.santiago.apimercagro.model.Rol;
 import com.santiago.apimercagro.model.Usuario;

@@ -23,17 +23,13 @@ public class Producto {
     @GeneratedValue ( strategy = GenerationType.IDENTITY)
     @Column(name = "id_producto")
     private Long idProducto;
-
-    @NotNull @Size(max = 20)
+    @Column(unique = true)
     private String nombre;
-
-    @NotNull @Min(0) @Digits(integer = 10, fraction = 2)
     private BigDecimal precio;
 
-    @Column(name = "unidad_medida", length = 20) @Size(max = 20, message = "Maximo 20 caracteres")
+    @Column(name = "unidad_medida", length = 20)
     private String unidadMedida = "kg";
 
-    @NotNull
     @Column(name = "fecha_actualizacion")
     private LocalDate fechaActualizacion;
 }

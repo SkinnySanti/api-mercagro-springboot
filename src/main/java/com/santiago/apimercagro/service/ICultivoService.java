@@ -1,15 +1,15 @@
 package com.santiago.apimercagro.service;
 
-import com.santiago.apimercagro.dto.CultivoDTO;
+import com.santiago.apimercagro.dto.request.RequestCultivoDTO;
+import com.santiago.apimercagro.dto.response.ResponseCultivoDTO;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ICultivoService {
-    List<CultivoDTO> listarCultivos();
-    CultivoDTO buscarCultivoPorId(Long id);
-    CultivoDTO crearCultivo(CultivoDTO cultivoDTO);
-    CultivoDTO actualizarCultivo(Long id, CultivoDTO cultivoDTO);
+    List<ResponseCultivoDTO> listarCultivos();
+    ResponseCultivoDTO buscarCultivoPorId(Long id);
+    ResponseCultivoDTO crearCultivo(RequestCultivoDTO requestCultivoDTO);
+    ResponseCultivoDTO actualizarCultivo(Long id, RequestCultivoDTO requestCultivoDTO);
     void eliminarCultivo(Long id);
 
 }

@@ -1,7 +1,7 @@
 package com.santiago.apimercagro.service;
 
-import com.santiago.apimercagro.dto.RequestUsuarioDTO;
-import com.santiago.apimercagro.dto.ResponseUsuarioDTO;
+import com.santiago.apimercagro.dto.request.RequestUsuarioDTO;
+import com.santiago.apimercagro.dto.response.ResponseUsuarioDTO;
 
 import java.util.List;
 
