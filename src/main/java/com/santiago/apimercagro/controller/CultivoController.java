@@ -6,11 +6,12 @@ import com.santiago.apimercagro.service.ICultivoService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
 
-@RequestMapping("apiMercagro/v1/cultivo")
+@RequestMapping("/apiMercagro/v1/cultivo")
 @RestController
 public class CultivoController {
 
@@ -36,8 +37,18 @@ public class CultivoController {
     public ResponseEntity<ResponseCultivoDTO> crearCultivo(@Valid @RequestBody
                                                                RequestCultivoDTO requestCultivoDTO){
         ResponseCultivoDTO cultivoCreado = cultivoService.crearCultivo(requestCultivoDTO);
-        return ResponseEntity.created(URI.create("/apiMercagro/v1/cultivo/" + cultivoCreado.getIdCultivo()))
-                .body(cultivoCreado);
+
+        /*1) Se utiliza toda la url de la petición HTTP
+        * 2) Se agrega el segmento del ID al path creado
+        * 3) Se mapea el ID con el atributo correspondiente
+        * 4) Se convierte el resultado a URI */
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(cultivoCreado.getIdCultivo())
+                .toUri();
+
+        return ResponseEntity.created(location).body(cultivoCreado);
     }
 
     @PutMapping("/{id}")

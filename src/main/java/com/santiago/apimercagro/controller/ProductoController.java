@@ -7,7 +7,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -38,7 +40,18 @@ public class ProductoController {
     ResponseEntity<ProductoDTO> crearProducto(@Valid @RequestBody ProductoDTO productoDTO){
         log.info("Creando producto...");
         ProductoDTO productoCreado = productoService.crearProducto(productoDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(productoCreado);
+
+        /*1) Se utiliza toda la url de la petición HTTP
+         * 2) Se agrega el segmento del ID al path creado
+         * 3) Se mapea el ID con el atributo correspondiente
+         * 4) Se convierte el resultado a URI */
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(productoCreado.getIdProducto())
+                .toUri();
+
+        return ResponseEntity.created(location).body(productoCreado);
     }
 
     @PutMapping("/{id}")
