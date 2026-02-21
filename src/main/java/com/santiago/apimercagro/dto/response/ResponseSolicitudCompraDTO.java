@@ -1,4 +1,5 @@
-package com.santiago.apimercagro.dto;
+package com.santiago.apimercagro.dto.response;
+
 
 import com.santiago.apimercagro.enums.EstadoSolicitud;
 import lombok.*;
@@ -11,8 +12,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 
-public class SolicitudCompraDTO {
-    private Long idSolicitudCompra;
+public class ResponseSolicitudCompraDTO {
+    private Long idSolicitud;
     private String nombreCultivo;
     private String nombreProducto;
     private String mensaje;

@@ -29,13 +29,10 @@ public class RequestCultivoDTO {
     private String unidadMedida;
 
     @NotNull(message = "El precio es obligatorio")
-    @Min(0)
+    @DecimalMin("0.01")
     @Digits(integer = 10, fraction = 2)
     private BigDecimal precio;
 
     @NotNull(message = "El estado es obligatorio")
     private EstadoCultivo estado;
-
-    @NotNull(message = "La fecha es obligatoria")
-    private LocalDate fechaCreacion;
 }

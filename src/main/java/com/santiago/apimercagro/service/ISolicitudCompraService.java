@@ -1,14 +1,14 @@
 package com.santiago.apimercagro.service;
 
-import com.santiago.apimercagro.dto.SolicitudCompraDTO;
+import com.santiago.apimercagro.dto.RequestSolicitudCompraDTO;
+import com.santiago.apimercagro.dto.response.ResponseSolicitudCompraDTO;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ISolicitudCompraService {
-    List<SolicitudCompraDTO> listarSolicitudes();
-    SolicitudCompraDTO buscarSolicitudPorId(Long id);
-    SolicitudCompraDTO crearSolicitud(SolicitudCompraDTO solicitudCompraDTO);
-    SolicitudCompraDTO actualizarSolicitud(Long id, SolicitudCompraDTO solicitudCompraDTO);
+    List<ResponseSolicitudCompraDTO> listarSolicitudes();
+    ResponseSolicitudCompraDTO buscarSolicitudPorId(Long id);
+    ResponseSolicitudCompraDTO crearSolicitud(RequestSolicitudCompraDTO solicitudCompraDTO);
+    ResponseSolicitudCompraDTO actualizarSolicitud(Long id, RequestSolicitudCompraDTO solicitudCompraDTO);
     void eliminarSolicitud(Long id);
 }

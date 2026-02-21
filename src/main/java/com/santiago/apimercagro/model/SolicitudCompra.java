@@ -26,7 +26,7 @@ public class SolicitudCompra {
     @JoinColumn(name = "cultivo_id", referencedColumnName = "id_cultivo")
     private Cultivo cultivo;
 
-    @Size(max = 50, message = "Maximo 50 caracteres")
+    @Column(length = 50)
     private String mensaje;
 
     @Enumerated(EnumType.STRING)
@@ -34,5 +34,5 @@ public class SolicitudCompra {
     private EstadoSolicitud estadoSolicitud = EstadoSolicitud.PENDIENTE;
 
     @Column(name = "fecha_creacion")
-    private LocalDate fechaCreacion;
+    private LocalDate fechaCreacion = LocalDate.now();
 }
