@@ -40,7 +40,7 @@ public class Cultivo {
     private EstadoCultivo estadoCultivo = EstadoCultivo.REGISTRO;
 
     @Column(name = "fecha_creacion")
-    private LocalDate fechaCreacion;
+    private LocalDate fechaCreacion = LocalDate.now();
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "cultivo")
     private List<SolicitudCompra> solicitudesCompras = new ArrayList<>();

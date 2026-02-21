@@ -2,10 +2,8 @@ package com.santiago.apimercagro.mapper;
 
 import com.santiago.apimercagro.dto.request.RequestUsuarioDTO;
 import com.santiago.apimercagro.dto.response.ResponseUsuarioDTO;
-import com.santiago.apimercagro.exception.NotFoundException;
 import com.santiago.apimercagro.model.Rol;
 import com.santiago.apimercagro.model.Usuario;
-import com.santiago.apimercagro.repository.RolRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -15,10 +13,6 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class UsuarioMapper {
-
-
-    private final RolRepository rolRepository;
-
     public ResponseUsuarioDTO toDto(Usuario usuario){
         if(usuario == null) return null;
 
@@ -31,11 +25,8 @@ public class UsuarioMapper {
                 .build();
     }
 
-    public Usuario toEntity(RequestUsuarioDTO usuarioDTO){
+    public Usuario toEntity(RequestUsuarioDTO usuarioDTO, Rol rol){
         if (usuarioDTO == null) return null;
-
-        Rol rol = rolRepository.findRolByNombre(usuarioDTO.getNombreRol())
-                .orElseThrow(()-> new NotFoundException("Rol no encontrado"));
 
         return Usuario.builder()
                 .username(usuarioDTO.getUsername())

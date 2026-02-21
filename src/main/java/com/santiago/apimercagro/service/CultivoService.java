@@ -49,15 +49,17 @@ public class CultivoService implements ICultivoService{
         if(requestCultivoDTO.getEstado().equals(EstadoCultivo.PUBLICADO)){
             //Buscamos si existe el producto por nombre
             Producto producto = productoRepository.findProductoByNombre(requestCultivoDTO.getNombreProducto())
-                    .orElseThrow(()-> new NotFoundException("Producto no asigando para el cultivo PUBLICADO " + requestCultivoDTO.getNombreProducto()));
+                    .orElseThrow(()-> new NotFoundException("Producto no asignado para el cultivo PUBLICADO " + requestCultivoDTO.getNombreProducto()));
             //Validacion para ver si tiene un precio el cultivo
             if(requestCultivoDTO.getPrecio() == null) throw new RuntimeException("El precio es obligatorio para publicar el cultivo");
             //Validadcion para verificar si el precio del cultivo es mayor al del precio del producto
             if(requestCultivoDTO.getPrecio().compareTo(producto.getPrecio()) == 0 || requestCultivoDTO.getPrecio().compareTo(producto.getPrecio()) > 0)
                 throw new RuntimeException("El precio debe estar por debajo del precio de mercado: " + producto.getPrecio());
         }
+        Producto producto = productoRepository.findProductoByNombre(requestCultivoDTO.getNombreProducto())
+                .orElseThrow(()-> new NotFoundException("Producto no encontrado"));
 
-        Cultivo cultivo = cultivoMapper.toEntity(requestCultivoDTO);
+        Cultivo cultivo = cultivoMapper.toEntity(requestCultivoDTO, producto);
 
         return cultivoMapper.toDto(cultivoRepository.save(cultivo));
     }
@@ -77,7 +79,6 @@ public class CultivoService implements ICultivoService{
         cultivo.setUnidadMedida(requestCultivoDTO.getUnidadMedida());
         cultivo.setPrecio(requestCultivoDTO.getPrecio());
         cultivo.setEstadoCultivo(requestCultivoDTO.getEstado());
-        cultivo.setFechaCreacion(requestCultivoDTO.getFechaCreacion());
 
         return cultivoMapper.toDto(cultivoRepository.save(cultivo));
     }

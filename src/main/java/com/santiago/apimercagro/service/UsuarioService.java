@@ -50,7 +50,9 @@ public class UsuarioService implements IUsuarioService{
 
     @Override
     public ResponseUsuarioDTO crearUsuario(RequestUsuarioDTO usuarioDTO) {
-        Usuario usuario = usuarioMapper.toEntity(usuarioDTO);
+        Rol rol = rolRepository.findRolByNombre(usuarioDTO.getNombreRol())
+                .orElseThrow(()-> new NotFoundException("Rol no encontrado"));
+        Usuario usuario = usuarioMapper.toEntity(usuarioDTO, rol);
         return usuarioMapper.toDto(usuarioRepository.save(usuario));
     }
 
